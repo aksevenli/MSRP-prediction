@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html >
+<!--From https://codepen.io/frytyler/pen/EGdtg-->
+<head>
+    <meta charset="UTF-8">
+    <title>ML Deployment using Heroku</title>
+    <link href='https://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Arimo' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Hind:300' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
+</head>
+
+<body>
+    <div class="prediction">
+        <h1>Manufacturer Suggested Price Prediction</h1>
+        <form action="{{ url_for('predict')}}"method="post">
+		<br>
+    		<label for="brand">Brand</label>
+    		<select id="brandid" name="brandclass" required="required">
+                <option value="1">bmw</option>
+                <option value="2">audi</option>
+                <option value="3">fiat</option>
+                <option value="4">mercedes-benz</option>
+                <option value="5">chrysler</option>
+                <option value="6">nissan</option>
+                <option value="7">volvo</option>
+                <option value="8">mazda</option>
+                <option value="9">mitsubishi</option>
+                <option value="10">ferrari</option>
+                <option value="11">alfa_romeo</option>
+                <option value="12">toyota</option>
+                <option value="13">mclaren</option>
+                <option value="14">maybach</option>
+                <option value="15">pontiac</option>
+                <option value="16">porsche</option>
+                <option value="17">saab</option>
+                <option value="18">gmc</option>
+                <option value="19">hyundai</option>
+                <option value="20">plymouth</option>
+                <option value="21">honda</option>
+                <option value="22">oldsmobile</option>
+                <option value="23">suzuki</option>
+                <option value="24">ford</option>
+                <option value="25">cadillac</option>
+                <option value="26">kia</option>
+                <option value="27">bentley</option>
+                <option value="28">chevrolet</option>
+                <option value="29">dodge</option>
+                <option value="30">lamborghini</option>
+                <option value="31">lincoln</option>
+                <option value="32">subaru</option>
+                <option value="33">volkswagen</option>
+                <option value="34">spyker</option>
+                <option value="35">buick</option>
+                <option value="36">acura</option>
+                <option value="37">rolls-royce</option>
+                <option value="38">maserati&Tobago</option>
+                <option value="39">lexus</option>
+                <option value="40">aston_martin</option>
+                <option value="41">lotus</option>
+                <option value="42">infiniti</option>
+                <option value="43">scion</option>
+                <option value="44">genesis</option>
+                <option value="45">hummer</option>
+                <option value="46">tesla</option>
+                <option value="47">bugatti</option>
+    		</select>
+    		<br>
+        <label for="model">Model</label>
+        <input type="text" id="model" name="model" required="required">
+        <br>
+		<label for="year">Year</label>
+        <input type="text" id="year" name="year" required="required">
+    	<br>
+    		<label for="engine_fuel_type">Engine Fuel Type</label>
+    		<select id="engine_fuel_type" name="engine_fuel_type" required="required">
+      			<option value="0">premium_unleaded_(required)</option>
+      			<option value="1">regular_unleaded</option>
+      			<option value="2">premium_unleaded_(recommended)</option>
+				<option value="3">flex-fuel_(unleaded/e85)</option>
+				<option value="4">diesel</option>
+				<option value="5">electric</option>
+				<option value="6">flex-fuel_(premium_unleaded_recommended/e85)</option>
+                <option value="7">natural_gas</option>
+                <option value="8">flex-fuel_(premium_unleaded_required/e85)</option>
+                <option value="9">flex-fuel_(unleaded/natural_gas)</option>
+    		</select>
+    		<br>
+        <label for="engine_hp">Engine HP</label>
+        <input type="text" id="engine_hp" name="engine_hp" required="required">
+        <br>
+        <label for="engine_cylinders">Engine Cylinders</label>
+        <input type="text" id="engine_cylinders" name="engine_cylinders" required="required">
+        <br>
+		<label for="transmission_type">Transmission Type</label>
+    		<select id="transmission_type" name="transmission_type" required="required">
+      			<option value="1">manual</option>
+      			<option value="2">automatic</option>
+      			<option value="3">automated_manual</option>
+      			<option value="4">direct_drive</option>
+      			<option value="5">unknown</option>
+    		</select>
+    		<br>
+    		<label for="driven_wheels">Driven Wheels</label>
+    		<select id="driven_wheels" name="driven_wheels" required="required">
+      			<option value="0">rear_wheel_drive</option>
+      			<option value="1">front_wheel_drive</option>
+      			<option value="2">all_wheel_drive</option>
+      			<option value="3">four_wheel_drive</option>
+    		</select>
+    		<br>
+            <label for="number_of_doors">Number of Doors</label>
+            <input type="text" id="number_of_doors" name="number_of_doors" required="required">
+            <br>
+    		<label for="vehicle_size">Vehicle Size</label>
+    		<select id="vehicle_size" name="vehicle_size" required="required">
+      			<option value="0">compact</option>
+      			<option value="1">midsize</option>
+      			<option value="2">large</option>
+    		</select>
+    		<br>
+    		<label for="vehicle_style">Vehicle Style</label>
+    		<select id="vehicle_style" name="vehicle_style" required="required">
+                <option value="0">coupe</option>
+                <option value="1">convertible</option>
+                <option value="2">sedan</option>
+                <option value="3">wagon</option>
+                <option value="4">4dr_hatchback</option>
+                <option value="5">2dr_hatchback</option>
+                <option value="6">4dr_suv</option>
+                <option value="7">passenger_minivan</option>
+                <option value="8">cargo_minivan</option>
+                <option value="9">crew_cab_pickup</option>
+                <option value="10">regular_cab_pickup</option>
+                <option value="11">extended_cab_pickup</option>
+                <option value="12">2dr_suv</option>
+                <option value="13">cargo_van</option>
+                <option value="14">convertible_suv</option>
+                <option value="15">passenger_van</option>
+    		</select>
+    		<br>
+            <p>Market Category</p>
+            <input type="checkbox" id="crossover" name="crossover" value="crossover">
+            <label for="crossover"> crossover</label><br>
+            <input type="checkbox" id="diesel" name="diesel" value="diesel">
+            <label for="diesel"> diesel</label><br>
+            <input type="checkbox" id="exotic" name="exotic" value="exotic">
+            <label for="exotic"> exotic</label><br>
+            <input type="checkbox" id="factory_tuner" name="factory_tuner" value="factory_tuner">
+            <label for="factory_tuner"> factory_tuner</label><br>
+            <input type="checkbox" id="flex_fuel" name="flex_fuel" value="flex_fuel">
+            <label for="flex_fuel"> flex_fuel</label><br>
+            <input type="checkbox" id="hatchback" name="hatchback" value="hatchback">
+            <label for="hatchback"> hatchback</label><br>
+            <input type="checkbox" id="high-performance" name="high-performance" value="high-performance">
+            <label for="high-performance"> high-performance</label><br>
+            <input type="checkbox" id="hybrid" name="hybrid" value="hybrid">
+            <label for="hybrid"> hybrid</label><br>
+            <input type="checkbox" id="luxury" name="luxury" value="luxury">
+            <label for="luxury"> luxury</label><br>
+            <input type="checkbox" id="missing" name="missing" value="missing">
+            <label for="missing"> missing</label><br>
+            <input type="checkbox" id="performance" name="performance" value="performance">
+            <label for="performance"> performance</label><br>
+    		<br>
+        	<button type="submit" class="btn btn-primary btn-block btn-large">Predict</button>
+        </form>
+
+       <br>
+       <b>{{ prediction_text }}</b>
+    </div>
+</body>
+</html>
